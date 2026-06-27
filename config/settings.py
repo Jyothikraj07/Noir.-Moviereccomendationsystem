@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 import dj_database_url
 
+# Load .env locally (ignored in Render if env vars are set)
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,11 +13,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 # =========================
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-dev-key")
 
-DEBUG = os.getenv("DEBUG") == "True"
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["*"]   # (OK for now; tighten later for production)
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    ".onrender.com",
+]
 
 
 # =========================
@@ -48,8 +53,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-
-    # WhiteNoise MUST be right after SecurityMiddleware
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -61,12 +64,7 @@ MIDDLEWARE = [
 ]
 
 
-# =========================
-# URLS / WSGI
-# =========================
-
 ROOT_URLCONF = 'config.urls'
-
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
@@ -91,28 +89,18 @@ TEMPLATES = [
 
 
 # =========================
-# DATABASE (Neon / Local)
+# DATABASE (Neon / Local fallback)
 # =========================
 
-if os.getenv("DATABASE_URL"):
-    DATABASES = {
-        "default": dj_database_url.parse(os.getenv("DATABASE_URL"))
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.mysql",
-            "NAME": os.getenv("DB_NAME"),
-            "USER": os.getenv("DB_USER"),
-            "PASSWORD": os.getenv("DB_PASSWORD"),
-            "HOST": os.getenv("DB_HOST"),
-            "PORT": os.getenv("DB_PORT"),
-        }
-    }
+DATABASES = {
+    "default": dj_database_url.parse(
+        os.getenv("DATABASE_URL", "sqlite:///db.sqlite3")
+    )
+}
 
 
 # =========================
-# AUTH
+# PASSWORD VALIDATION
 # =========================
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -134,19 +122,25 @@ USE_TZ = True
 
 
 # =========================
-# STATIC FILES (IMPORTANT FIX)
+# STATIC FILES (CRITICAL FIX)
 # =========================
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# WhiteNoise production optimization
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# WhiteNoise (correct modern setup)
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 
 # =========================
