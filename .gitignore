@@ -9,5 +9,8 @@ __pycache__/
 venv/
 .venv/
 
-# VS Code settings (optional)
+# VS Code settings
 .vscode/
+
+# Collected static files
+staticfiles/
