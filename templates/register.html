@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/auth.css' %}">
+    <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+</head>
+<body>
+        <div class="logo-container" onclick="window.location.href='/'">
+        <div class="clapper-icon">
+            <div class="clapper-top"></div>
+            <div class="clapper-base"></div>
+        </div>
+
+        <span class="logo-text">
+            NOIR<span class="logo-dot">.</span>
+        </span>
+    </div>
+
+<div class="container">
+
+    <h1>Create Account</h1>
+
+    <input
+        type="text"
+        id="username"
+        placeholder="Username">
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Email">
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Password">
+
+    <button id="registerBtn">
+        Register
+    </button>
+
+    <p id="message"></p>
+
+    <p>
+        Already have an account?
+        <a href="/">Login</a>
+    </p>
+
+</div>
+
+<script src="{% static 'js/register.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>My Ratings</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/ratings.css' %}">
+    <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+</head>
+
+<body>
+
+        <div class="logo-container" onclick="window.location.href='/'">
+        <div class="clapper-icon">
+            <div class="clapper-top"></div>
+            <div class="clapper-base"></div>
+        </div>
+
+        <span class="logo-text">
+            NOIR<span class="logo-dot">.</span>
+        </span>
+    </div>
+
+
+    <h1> Your Ratings</h1>
+
+    <div class="top-buttons">
+
+        <button onclick="window.location.href='/movies/ui/'">
+            ← Home
+        </button>
+
+    </div>
+
+    <div id="ratingsContainer"
+         class="movies">
+    </div>
+
+    <script src="{% static 'js/ratings.js' %}"></script>
+
+</body>
+</html>

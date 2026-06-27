@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/auth.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="logo-container" onclick="window.location.href='/'">
+        <div class="clapper-icon">
+            <div class="clapper-top"></div>
+            <div class="clapper-base"></div>
+        </div>
+
+        <span class="logo-text">
+            NOIR<span class="logo-dot">.</span>
+        </span>
+    </div>
+<div class="container">
+
+    <h1>Login</h1>
+
+    <input
+        type="text"
+        id="username"
+        placeholder="Username">
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Password">
+
+    <button id="loginBtn">
+        Login
+    </button>
+
+    <p id="message"></p>
+
+    <p>
+        Don't have an account?
+        <a href="/register/">Register</a>
+    </p>
+
+</div>
+
+<script src="{% static 'js/login.js' %}"></script>
+
+</body>
+</html>

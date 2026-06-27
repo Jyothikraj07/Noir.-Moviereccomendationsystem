@@ -1,0 +1,105 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIR - Movie Recommendation System</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+    <!-- Logo -->
+    <div class="logo-container" onclick="window.location.href='/'">
+        <div class="clapper-icon">
+            <div class="clapper-top"></div>
+            <div class="clapper-base"></div>
+        </div>
+
+        <span class="logo-text">
+            NOIR<span class="logo-dot">.</span>
+        </span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-links">
+        <a href="/" class="active">Movies</a>
+        <a href="/watchlist/ui/">Watchlist</a>
+        <a href="/ratings/ui/">Ratings</a>
+
+        <a href="#"
+           onclick="logoutUser()"
+           class="logout-btn">
+            Logout
+        </a>
+    </nav>
+
+    <!-- Filters -->
+    <div class="filter-box">
+
+        <select id="genre">
+            <option value="">Select Genre</option>
+            <option value="Action">Action</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Thriller">Thriller</option>
+        </select>
+
+        <select id="language">
+            <option value="">Select Language</option>
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+            <option value="ta">Tamil</option>
+            <option value="te">Telugu</option>
+        </select>
+
+        <select id="tier">
+            <option value="3">Low Tier</option>
+            <option value="4">Tier 4+</option>
+            <option value="5">Tier 5+</option>
+            <option value="6">Tier 6+</option>
+            <option value="7">Tier 7+</option>
+            <option value="8">Tier 8+</option>
+            <option value="9">Tier 9+</option>
+        </select>
+
+        <button id="recommendBtn">
+            Generate Recommendations
+        </button>
+
+    </div>
+
+    <!-- Movies -->
+    <div id="movieContainer" class="movies"></div>
+
+    <!-- Pagination -->
+        <div class="pagination">
+
+        <button id="prevBtn" class="page-btn">
+            ← Previous
+        </button>
+
+        <span id="pageNumber">
+            Page 1
+        </span>
+
+        <button id="nextBtn" class="page-btn">
+            Next →
+        </button>
+
+    </div>
+
+    <script src="{% static 'js/home.js' %}"></script>
+
+</body>
+</html>
