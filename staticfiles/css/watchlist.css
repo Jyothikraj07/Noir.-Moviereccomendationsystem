@@ -1,0 +1,319 @@
+:root {
+    --bg-dark: #0a0a0a;
+    --surface-card: #121212;
+    --surface-hover: #1a1a1a;
+    --accent-blue: rgba(255, 255, 255, 0.6);
+    --accent-red: #ff0033; /* Kept for clean deletion/remove states */
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-hover: rgba(255, 255, 255, 0.6);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    padding-bottom: 60px;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0 30px;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+/* ==========================================================================
+   THE NOIR CLAPPERBOARD LOGO COMPONENT
+   ========================================================================== */
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 60px auto 20px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+/* Core Clapperboard Geometry */
+.clapper-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 42px;
+}
+
+/* The Movable Top Stick */
+.clapper-top {
+    height: 10px;
+    width: 100%;
+    border: 1px solid #ffffff;
+    background: repeating-linear-gradient(
+        -45deg,
+        #000000,
+        #000000 6px,
+        #ffffff 6.5px,
+        #ffffff 12.5px
+    );
+    transform-origin: bottom left;
+    transform: rotate(-15deg); /* Kept slightly open by default */
+    transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    will-change: transform;
+}
+
+/* The Static Lower Slate Base */
+.clapper-base {
+    height: 24px;
+    width: 100%;
+    background: #111111;
+    border: 1px solid #ffffff;
+    border-radius: 0 0 3px 3px;
+    position: relative;
+}
+
+.clapper-base::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: repeating-linear-gradient(
+        -45deg,
+        #000000,
+        #000000 6px,
+        #ffffff 6.5px,
+        #ffffff 12.5px
+    );
+    border-bottom: 1px solid #ffffff;
+}
+
+/* Logo Typography Layout */
+.logo-text {
+    font-size: 3.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -1.5px;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.logo-dot {
+    color: #ffffff;
+    animation: pulse 2s infinite;
+}
+
+/* INTERACTIVE ANIMATION: Snaps shut when you hover over the logo area */
+.logo-container:hover .clapper-top {
+    transform: rotate(0deg);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* ==========================================================================
+   NAVIGATION / TOP CONTROLS
+   ========================================================================== */
+.top-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+button {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid var(--border-color);
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: .9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all .25s ease;
+}
+
+button:hover {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+}
+
+/* ==========================================================================
+   WATCHLIST POSTER GRID SYSTEM
+   ========================================================================== */
+.movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    grid-auto-rows: minmax(580px, auto); /* Safe-guard: Rows expand gracefully if movie content grows */                     
+    gap: 35px;
+    padding: 0 40px;
+    max-width: 1450px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   THEATER POSTER CARD ARCHITECTURE
+   ========================================================================== */
+.card {
+    position: relative;
+    background: var(--surface-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+    width: 100%;
+    z-index: 1;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                border-color 0.4s ease,
+                box-shadow 0.4s ease;
+    will-change: transform, box-shadow;
+}
+
+.card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-12px) scale(1.04); 
+    box-shadow: 0 40px 70px rgba(0, 0, 0, 0.95);
+    z-index: 10;
+}
+
+/* Vivid Poster handling (Stays in full color permanently) */
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    filter: brightness(85%); /* Ensures readable overlay text contrast over light images */
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+.card:hover img {
+    transform: scale(1.04);
+}
+
+/* Cinematic Dark Shadow Vignette Vignette Over Image Backdrop */
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top, 
+        rgba(0, 0, 0, 1) 0%, 
+        rgba(0, 0, 0, 0.85) 45%, 
+        rgba(0, 0, 0, 0.2) 80%,
+        transparent 100%
+    );
+    z-index: 2;
+    pointer-events: none;
+}
+
+.details {
+    position: relative;
+    z-index: 3;
+    padding: 24px;
+    width: 100%;
+    margin-top: auto;
+}
+
+.details h3 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.details p {
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+/* REFACTORED PREMIUM REMOVE WATCHLIST STATE BUTTON */
+.remove-btn {
+    width: 100%;
+    margin-top: 8px;
+    background: transparent;
+    border: 1px solid var(--accent-red);
+    color: var(--accent-red);
+    border-radius: 4px;
+    padding: 12px 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    transition: all .2s ease;
+}
+
+.remove-btn:hover {
+    background: var(--accent-red);
+    color: #ffffff;
+    border-color: var(--accent-red);
+    transform: none; /* Prevents visual transformation clipping glitches inside the parent element */
+    box-shadow: none;
+}
+
+/* ==========================================================================
+   SCROLLBAR & RESPONSIVENESS VIEWPORT TRACKING
+   ========================================================================== */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: #333333;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .logo-text {
+        font-size: 2.6rem;
+    }
+    
+    .clapper-icon {
+        width: 34px;
+    }
+
+    .top-buttons {
+        padding: 0 20px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .movies {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        grid-auto-rows: minmax(500px, auto);
+        padding: 0 20px;
+        gap: 20px;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px) scale(1.02);
+    }
+}
