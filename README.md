@@ -1,4 +1,4 @@
-# 🎬 NOIR - Movie Recommendation System
+# 🎬 NOIR. - Movie Recommendation System
 
 NOIR is a full-stack movie recommendation web application built with Django and Django REST Framework. Users can register, browse movies, rate films, manage their watchlist, and receive personalized recommendations based on their preferences.
 
