@@ -345,3 +345,31 @@ button:hover {
         transform: translateY(-5px) scale(1.02);
     }
 }
+.watchlist-ai-btn {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 6px;
+    cursor: pointer;
+    
+    /* Elegant theme alignment additions */
+    font-family: 'Plus Jakarta Sans', sans-serif; /* Keep typography uniform */
+    font-size: 0.85rem;                          /* Proportional sizing */
+    font-weight: 700;                            /* Match your other UI weights */
+    text-transform: uppercase;                   /* Gives it that high-end noir look */
+    letter-spacing: 1px;                         /* Cleaner readability for UI caps */
+    
+    /* Transition tuning to match your global 0.25s timing */
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.watchlist-ai-btn:hover {
+    background: white;
+    color: black;
+    /* Optional: Subtle glow to emphasize the 'AI' aspect without breaking the noir feel */
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15); 
+}

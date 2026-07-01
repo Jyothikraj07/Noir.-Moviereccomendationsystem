@@ -34,10 +34,12 @@
         <a href="/" class="active">Movies</a>
         <a href="/watchlist/ui/">Watchlist</a>
         <a href="/ratings/ui/">Ratings</a>
-
-        <a href="#"
-           onclick="logoutUser()"
-           class="logout-btn">
+        <a href="/chat/ui/">AI Chat</a>
+        <a
+            href="#"
+            onclick="logoutUser()"
+            class="logout-btn"
+        >
             Logout
         </a>
     </nav>
@@ -83,7 +85,7 @@
     <div id="movieContainer" class="movies"></div>
 
     <!-- Pagination -->
-        <div class="pagination">
+    <div class="pagination">
 
         <button id="prevBtn" class="page-btn">
             ← Previous
@@ -98,6 +100,56 @@
         </button>
 
     </div>
+
+
+    <!-- ==========================
+         NOIR AI CHATBOT
+    =========================== -->
+
+    <button class="chatbot-btn" id="chatbotToggle">
+        AI
+    </button>
+
+    <div class="chat-window" id="chatWindow">
+
+        <div class="chat-header">
+            <h3>NOIR AI</h3>
+
+            <button class="close-chat" id="closeChat">
+                ✕
+            </button>
+        </div>
+
+        <div
+            class="chat-messages"
+            id="chat-box"
+        >
+
+            <div class="bot-message">
+                🎬 Welcome to NOIR.
+
+                Ask me for movie recommendations,
+                genres, or similar films.
+            </div>
+
+        </div>
+
+        <div class="chat-input-container">
+
+            <input
+                type="text"
+                id="message-input"
+                placeholder="Ask about movies..."
+            >
+
+            <button id="send-btn">
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
 
     <script src="{% static 'js/home.js' %}"></script>
 

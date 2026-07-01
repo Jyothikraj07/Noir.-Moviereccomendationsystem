@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIR - Movie Recommendation System</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+    <title>NOIR AI Chat</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/chat.css' %}"
+    >
+
+</head>
+
+<body>
+
+    <div class="logo-container" onclick="window.location.href='/movies/ui/'">        <div class="clapper-icon">
+            <div class="clapper-top"></div>
+            <div class="clapper-base"></div>
+        </div>
+
+        <span class="logo-text">
+            NOIR<span class="logo-dot">.</span>
+        </span>
+    </div>
+
+    <nav class="nav-links">
+        <a href="/movies/ui/">Movies</a>
+        <a href="/watchlist/ui/">Watchlist</a>
+        <a href="/ratings/ui/">Ratings</a>
+        <a href="/chat/ui/" class="active">
+            AI Chat
+        </a>
+                <a
+            href="#"
+            onclick="logoutUser()"
+            class="logout-btn"
+        >
+            Logout
+        </a>
+    </nav>
+
+    <div class="chat-container">
+
+        <div id="chat-box">
+
+            <div class="bot-message">
+                Hello! Ask me for movie recommendations.
+            </div>
+
+        </div>
+
+        <div class="chat-input">
+
+            <input
+                type="text"
+                id="message-input"
+                placeholder="Ask about movies..."
+            >
+
+            <button id="send-btn">
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/chat.js' %}"></script>
+
+</body>
+</html>
