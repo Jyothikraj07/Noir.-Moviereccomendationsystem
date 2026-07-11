@@ -17,11 +17,9 @@ SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-dev-key")
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-    ".onrender.com",
-]
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+ALLOWED_HOSTS = ["*"]
 
 
 # =========================

@@ -17,3 +17,6 @@ db.sqlite3
 
 # Collected static files
 staticfiles/
+
+# Movie data
+movies.json
